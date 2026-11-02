@@ -9,9 +9,14 @@ services:
 
     environment:
       TZ: Europe/Stockholm
+    
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
 
     volumes:
       - ${HA_CONFIG_DIR}:/config
       - /etc/localtime:/etc/localtime:ro
+      - /run/dbus:/run/dbus:ro
 
     stop_grace_period: 60s
