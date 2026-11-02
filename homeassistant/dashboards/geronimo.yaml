@@ -42,6 +42,62 @@ views:
               yellow: 70
               red: 85
 
+          - type: markdown
+            content: |
+              ## Storage & System
+
+          - type: horizontal-stack
+            cards:
+              - type: gauge
+                name: Root /
+                entity: sensor.localhost_host_disk_usage
+                min: 0
+                max: 100
+                severity:
+                  green: 0
+                  yellow: 75
+                  red: 90
+
+              - type: gauge
+                name: K3s /var
+                entity: sensor.localhost_host_var_disk_usage
+                min: 0
+                max: 100
+                severity:
+                  green: 0
+                  yellow: 75
+                  red: 90
+
+              - type: gauge
+                name: Home /home
+                entity: sensor.localhost_host_home_disk_usage
+                min: 0
+                max: 100
+                severity:
+                  green: 0
+                  yellow: 75
+                  red: 90
+
+      - type: entities
+        title: System
+        show_header_toggle: false
+        entities:
+          - entity: sensor.localhost_swap_usage
+            name: Swap usage
+          - entity: sensor.localhost_uptime
+            name: Last boot
+
+      - type: history-graph
+        title: Disk usage — Last 7 days
+        hours_to_show: 168
+        entities:
+          - entity: sensor.localhost_host_disk_usage
+            name: Root /
+          - entity: sensor.localhost_host_var_disk_usage
+            name: K3s /var
+          - entity: sensor.localhost_host_home_disk_usage
+            name: Home /home
+
       - type: history-graph
         title: CPU & RAM — Last 24 hours
         hours_to_show: 24
