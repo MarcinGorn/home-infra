@@ -27,6 +27,11 @@ for file in configuration.yaml automations.yaml scripts.yaml scenes.yaml; do
   install -m 0644 "homeassistant/$file" "$HA_CONFIG_DIR/$file"
 done
 
+install -d /srv/homeassistant/config/dashboards
+install -m 0644 \
+  homeassistant/dashboards/geronimo.yaml \
+  /srv/homeassistant/config/dashboards/geronimo.yaml
+
 echo "==> Deploying Home Assistant"
 docker compose up -d --remove-orphans
 

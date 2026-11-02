@@ -1,0 +1,10 @@
+title: Geronimo System Monitor
+views:
+  - title: Overview
+    path: overview
+    icon: mdi:server
+    cards:
+      - type: markdown
+        content: |
+          ## GERONIMO
+          System monitoring — Ubuntu / Docker / K3s
