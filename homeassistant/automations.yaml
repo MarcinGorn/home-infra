@@ -19,3 +19,103 @@
           Threshold: 80%.
         data:
           tag: geronimo-var-disk
+
+# MON-12: GERONIMO SYSTEM ALERTS
+
+- id: geronimo_cpu_high
+  alias: "GERONIMO - High CPU usage"
+  triggers:
+    - trigger: numeric_state
+      entity_id: sensor.localhost_cpu_usage
+      above: 90
+      for:
+        minutes: 10
+  actions:
+    - action: notify.mobile_app_miquel_iphone
+      data:
+        title: "GERONIMO - High CPU"
+        message: >-
+          CPU usage: {{ states('sensor.localhost_cpu_usage') }}%.
+          Threshold: 90% for 10 minutes.
+        data:
+          tag: geronimo-cpu
+  mode: single
+
+- id: geronimo_cpu_temperature_high
+  alias: "GERONIMO - CPU overheating"
+  triggers:
+    - trigger: numeric_state
+      entity_id: sensor.localhost_package_id_0_temperature
+      above: 85
+      for:
+        minutes: 2
+  actions:
+    - action: notify.mobile_app_miquel_iphone
+      data:
+        title: "GERONIMO - CPU Temperature"
+        message: >-
+          CPU temperature:
+          {{ states('sensor.localhost_package_id_0_temperature') }}°C.
+          Threshold: 85°C for 2 minutes.
+        data:
+          tag: geronimo-temperature
+  mode: single
+
+- id: geronimo_memory_high
+  alias: "GERONIMO - High memory usage"
+  triggers:
+    - trigger: numeric_state
+      entity_id: sensor.localhost_memory_usage
+      above: 90
+      for:
+        minutes: 10
+  actions:
+    - action: notify.mobile_app_miquel_iphone
+      data:
+        title: "GERONIMO - High RAM usage"
+        message: >-
+          RAM usage: {{ states('sensor.localhost_memory_usage') }}%.
+          Threshold: 90% for 10 minutes.
+        data:
+          tag: geronimo-memory
+  mode: single
+
+- id: geronimo_root_disk_high
+  alias: "GERONIMO - Root disk warning"
+  triggers:
+    - trigger: numeric_state
+      entity_id: sensor.localhost_host_disk_usage
+      above: 85
+      for:
+        minutes: 5
+  actions:
+    - action: notify.mobile_app_miquel_iphone
+      data:
+        title: "GERONIMO - Root disk warning"
+        message: >-
+          Root filesystem usage:
+          {{ states('sensor.localhost_host_disk_usage') }}%.
+          Threshold: 85%.
+        data:
+          tag: geronimo-root-disk
+  mode: single
+
+- id: geronimo_home_disk_high
+  alias: "GERONIMO - Home disk warning"
+  triggers:
+    - trigger: numeric_state
+      entity_id: sensor.localhost_host_home_disk_usage
+      above: 85
+      for:
+        minutes: 5
+  actions:
+    - action: notify.mobile_app_miquel_iphone
+      data:
+        title: "GERONIMO - Home disk warning"
+        message: >-
+          /home filesystem usage:
+          {{ states('sensor.localhost_host_home_disk_usage') }}%.
+          Threshold: 85%.
+        data:
+          tag: geronimo-home-disk
+  mode: single
