@@ -1,1 +1,21 @@
-[]
+- id: geronimo_var_disk_warning
+  alias: "GERONIMO - /var disk warning"
+  description: "Alert when /var disk usage exceeds 80% for 5 minutes"
+  mode: single
+
+  triggers:
+    - trigger: numeric_state
+      entity_id: sensor.localhost_host_var_disk_usage
+      above: 80
+      for:
+        minutes: 5
+
+  actions:
+    - action: notify.mobile_app_miquel_iphone
+      data:
+        title: "⚠️ GERONIMO - Disk warning"
+        message: >-
+          /var disk usage is {{ states('sensor.localhost_host_var_disk_usage') }}%.
+          Threshold: 80%.
+        data:
+          tag: geronimo-var-disk
