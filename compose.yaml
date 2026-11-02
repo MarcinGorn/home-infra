@@ -32,7 +32,7 @@ services:
       - "127.0.0.1:61208:61208" 
 
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
       - /etc/os-release:/etc/os-release:ro
+      - /:/host:ro,rslave
 
     stop_grace_period: 60s
