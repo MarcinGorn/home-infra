@@ -1,4 +1,5 @@
 title: Geronimo System Monitor
+
 views:
   - title: Overview
     path: overview
@@ -8,3 +9,51 @@ views:
         content: |
           ## GERONIMO
           System monitoring — Ubuntu / Docker / K3s
+
+      - type: horizontal-stack
+        cards:
+          - type: gauge
+            name: CPU Usage
+            entity: sensor.localhost_cpu_usage
+            min: 0
+            max: 100
+            severity:
+              green: 0
+              yellow: 65
+              red: 85
+
+          - type: gauge
+            name: RAM Usage
+            entity: sensor.localhost_memory_usage
+            min: 0
+            max: 100
+            severity:
+              green: 0
+              yellow: 75
+              red: 90
+
+          - type: gauge
+            name: CPU Temperature
+            entity: sensor.localhost_package_id_0_temperature
+            min: 0
+            max: 100
+            severity:
+              green: 0
+              yellow: 70
+              red: 85
+
+      - type: history-graph
+        title: CPU & RAM — Last 24 hours
+        hours_to_show: 24
+        entities:
+          - entity: sensor.localhost_cpu_usage
+            name: CPU
+          - entity: sensor.localhost_memory_usage
+            name: RAM
+
+      - type: history-graph
+        title: CPU Temperature — Last 24 hours
+        hours_to_show: 24
+        entities:
+          - entity: sensor.localhost_package_id_0_temperature
+            name: CPU Package
