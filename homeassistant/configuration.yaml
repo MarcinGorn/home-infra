@@ -1,0 +1,12 @@
+default_config:
+
+homeassistant:
+  name: Home
+  country: SE
+  time_zone: Europe/Stockholm
+  unit_system: metric
+  currency: SEK
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml

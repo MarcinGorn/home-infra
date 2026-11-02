@@ -1,0 +1,14 @@
+.env
+.env.*
+!.env.example
+
+**/.storage/
+**/deps/
+**/__pycache__/
+**/*.db
+**/*.db-*
+**/*.log
+
+**/secrets.yaml
+**/home-assistant_v2.db*
+backups/
