@@ -1,19 +1,39 @@
+
 title: Geronimo System Monitor
 
 views:
   - title: Overview
     path: overview
     icon: mdi:server
-    cards:
-      - type: markdown
-        content: |
-          ## GERONIMO
-          System monitoring — Ubuntu / Docker / K3s
+    type: sections
+    max_columns: 3
 
-      - type: horizontal-stack
+    sections:
+      # HEADER
+      - type: grid
+        column_span: 3
         cards:
+          - type: heading
+            heading: GERONIMO
+            heading_style: title
+            icon: mdi:server-network
+
+          - type: markdown
+            content: >
+              **Ubuntu Server** · Docker · K3s · Home Assistant · Glances
+            grid_options:
+              columns: 12
+
+      # CPU / RAM / TEMPERATURE
+      - type: grid
+        column_span: 3
+        cards:
+          - type: heading
+            heading: System Health
+            icon: mdi:heart-pulse
+
           - type: gauge
-            name: CPU Usage
+            name: CPU
             entity: sensor.localhost_cpu_usage
             min: 0
             max: 100
@@ -21,9 +41,11 @@ views:
               green: 0
               yellow: 65
               red: 85
+            grid_options:
+              columns: 4
 
           - type: gauge
-            name: RAM Usage
+            name: RAM
             entity: sensor.localhost_memory_usage
             min: 0
             max: 100
@@ -31,6 +53,8 @@ views:
               green: 0
               yellow: 75
               red: 90
+            grid_options:
+              columns: 4
 
           - type: gauge
             name: CPU Temperature
@@ -41,75 +65,108 @@ views:
               green: 0
               yellow: 70
               red: 85
+            grid_options:
+              columns: 4
 
-          - type: markdown
-            content: |
-              ## Storage & System
+      # STORAGE
+      - type: grid
+        column_span: 3
+        cards:
+          - type: heading
+            heading: Storage
+            icon: mdi:harddisk
 
-          - type: horizontal-stack
-            cards:
-              - type: gauge
-                name: Root /
-                entity: sensor.localhost_host_disk_usage
-                min: 0
-                max: 100
-                severity:
-                  green: 0
-                  yellow: 75
-                  red: 90
-
-              - type: gauge
-                name: K3s /var
-                entity: sensor.localhost_host_var_disk_usage
-                min: 0
-                max: 100
-                severity:
-                  green: 0
-                  yellow: 75
-                  red: 90
-
-              - type: gauge
-                name: Home /home
-                entity: sensor.localhost_host_home_disk_usage
-                min: 0
-                max: 100
-                severity:
-                  green: 0
-                  yellow: 75
-                  red: 90
-
-      - type: entities
-        title: System
-        show_header_toggle: false
-        entities:
-          - entity: sensor.localhost_swap_usage
-            name: Swap usage
-          - entity: sensor.localhost_uptime
-            name: Last boot
-
-      - type: history-graph
-        title: Disk usage — Last 7 days
-        hours_to_show: 168
-        entities:
-          - entity: sensor.localhost_host_disk_usage
+          - type: gauge
             name: Root /
-          - entity: sensor.localhost_host_var_disk_usage
+            entity: sensor.localhost_host_disk_usage
+            min: 0
+            max: 100
+            severity:
+              green: 0
+              yellow: 75
+              red: 90
+            grid_options:
+              columns: 4
+
+          - type: gauge
             name: K3s /var
-          - entity: sensor.localhost_host_home_disk_usage
+            entity: sensor.localhost_host_var_disk_usage
+            min: 0
+            max: 100
+            severity:
+              green: 0
+              yellow: 75
+              red: 90
+            grid_options:
+              columns: 4
+
+          - type: gauge
             name: Home /home
+            entity: sensor.localhost_host_home_disk_usage
+            min: 0
+            max: 100
+            severity:
+              green: 0
+              yellow: 75
+              red: 90
+            grid_options:
+              columns: 4
 
-      - type: history-graph
-        title: CPU & RAM — Last 24 hours
-        hours_to_show: 24
-        entities:
-          - entity: sensor.localhost_cpu_usage
-            name: CPU
-          - entity: sensor.localhost_memory_usage
-            name: RAM
+      # PERFORMANCE HISTORY
+      - type: grid
+        column_span: 2
+        cards:
+          - type: heading
+            heading: Performance History
+            icon: mdi:chart-line
 
-      - type: history-graph
-        title: CPU Temperature — Last 24 hours
-        hours_to_show: 24
-        entities:
-          - entity: sensor.localhost_package_id_0_temperature
-            name: CPU Package
+          - type: history-graph
+            title: CPU & RAM — 24 hours
+            hours_to_show: 24
+            entities:
+              - entity: sensor.localhost_cpu_usage
+                name: CPU
+              - entity: sensor.localhost_memory_usage
+                name: RAM
+            grid_options:
+              columns: 12
+
+          - type: history-graph
+            title: CPU Temperature — 24 hours
+            hours_to_show: 24
+            entities:
+              - entity: sensor.localhost_package_id_0_temperature
+                name: CPU Package
+            grid_options:
+              columns: 12
+
+      # SYSTEM INFORMATION
+      - type: grid
+        cards:
+          - type: heading
+            heading: System Information
+            icon: mdi:information-outline
+
+          - type: entities
+            title: Server
+            show_header_toggle: false
+            entities:
+              - entity: sensor.localhost_swap_usage
+                name: Swap usage
+              - entity: sensor.localhost_uptime
+                name: Last boot
+            grid_options:
+              columns: 12
+
+          - type: history-graph
+            title: Storage — 7 days
+            hours_to_show: 168
+            entities:
+              - entity: sensor.localhost_host_disk_usage
+                name: Root /
+              - entity: sensor.localhost_host_var_disk_usage
+                name: K3s /var
+              - entity: sensor.localhost_host_home_disk_usage
+                name: Home /home
+            grid_options:
+              columns: 12
