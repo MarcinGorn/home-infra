@@ -119,3 +119,20 @@
         data:
           tag: geronimo-home-disk
   mode: single
+
+- id: geronimo_glances_unavailable
+  alias: "Geronimo - Glances unavailable"
+  mode: single
+  triggers:
+    - trigger: template
+      value_template: >
+        {{ states('sensor.localhost_cpu_usage')
+            in ['unavailable', 'unknown'] }}
+      for: "00:03:00"
+  actions:
+    - action: notify.mobile_app_miquel_iphone
+      data:
+        title: "Geronimo - monitoring offline"
+        message: "Home Assistant utracił dane z Glances przez ponad 3 minuty."
+        data:
+          tag: geronimo-glances
