@@ -169,3 +169,22 @@
         message: "Home Assistant nie otrzymuje danych z AdGuard Home od ponad 3 minut."
         data:
           tag: geronimo-adguard
+
+- id: geronimo_adguard_recovered
+  alias: "Geronimo - AdGuard recovered"
+  mode: single
+  triggers:
+    - trigger: state
+      entity_id: sensor.adguard_home_dns_queries
+      from: "unavailable"
+  conditions:
+    - condition: template
+      value_template: >
+        {{ is_number(states('sensor.adguard_home_dns_queries')) }}
+  actions:
+    - action: notify.mobile_app_miquel_iphone
+      data:
+        title: "Geronimo - AdGuard restored"
+        message: "Home Assistant ponownie otrzymuje dane z AdGuard Home."
+        data:
+          tag: geronimo-adguard
