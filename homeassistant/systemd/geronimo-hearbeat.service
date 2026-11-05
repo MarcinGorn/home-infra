@@ -1,0 +1,7 @@
+[Unit]
+Description=Geronimo external heartbeat
+
+[Service]
+Type=oneshot
+EnvironmentFile=/etc/geronimo-heartbeat.env
+ExecStart=/usr/bin/curl --fail --silent --show-error --max-time 10 --retry 2 --retry-delay 3 ${HEALTHCHECK_URL}
