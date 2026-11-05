@@ -221,3 +221,36 @@
         message: "AdGuard ponownie prawidłowo rozwiązuje zapytania DNS."
         data:
           tag: geronimo-dns
+
+- id: geronimo_k3s_api_down
+  alias: "Geronimo - K3s API down"
+  mode: single
+  triggers:
+    - trigger: state
+      entity_id: sensor.geronimo_k3s_api_health
+      to: "FAIL"
+      for: "00:03:00"
+  actions:
+    - action: notify.mobile_app_miquel_iphone
+      data:
+        title: "Geronimo - K3s API DOWN"
+        message: "K3s API nie odpowiada prawidłowo od ponad 3 minut."
+        data:
+          tag: geronimo-k3s
+
+- id: geronimo_k3s_api_restored
+  alias: "Geronimo - K3s API restored"
+  mode: single
+  triggers:
+    - trigger: state
+      entity_id: sensor.geronimo_k3s_api_health
+      from: "FAIL"
+      to: "OK"
+      for: "00:01:00"
+  actions:
+    - action: notify.mobile_app_miquel_iphone
+      data:
+        title: "Geronimo - K3s API restored"
+        message: "K3s API ponownie odpowiada na HTTPS."
+        data:
+          tag: geronimo-k3s
