@@ -188,3 +188,36 @@
         message: "Home Assistant ponownie otrzymuje dane z AdGuard Home."
         data:
           tag: geronimo-adguard
+
+- id: geronimo_adguard_dns_failed
+  alias: "Geronimo - AdGuard DNS failed"
+  mode: single
+  triggers:
+    - trigger: state
+      entity_id: sensor.geronimo_adguard_dns_health
+      to: "FAIL"
+      for: "00:03:00"
+  actions:
+    - action: notify.mobile_app_miquel_iphone
+      data:
+        title: "Geronimo - DNS DOWN"
+        message: "AdGuard nie rozwiązuje zapytań DNS od ponad 3 minut!"
+        data:
+          tag: geronimo-dns
+
+- id: geronimo_adguard_dns_restored
+  alias: "Geronimo - AdGuard DNS restored"
+  mode: single
+  triggers:
+    - trigger: state
+      entity_id: sensor.geronimo_adguard_dns_health
+      from: "FAIL"
+      to: "OK"
+      for: "00:01:00"
+  actions:
+    - action: notify.mobile_app_miquel_iphone
+      data:
+        title: "Geronimo - DNS restored"
+        message: "AdGuard ponownie prawidłowo rozwiązuje zapytania DNS."
+        data:
+          tag: geronimo-dns
