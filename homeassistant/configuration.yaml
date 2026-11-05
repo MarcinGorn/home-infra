@@ -31,3 +31,17 @@ command_line:
         && echo OK || echo FAIL'
       scan_interval: 60
       command_timeout: 10
+
+  - sensor:
+      name: "Geronimo K3s API Health"
+      unique_id: geronimo_k3s_api_health
+      command: >-
+        sh -c 'code=$(curl -ksS --connect-timeout 3 --max-time 5
+        -o /dev/null -w "%{http_code}"
+        https://192.168.1.99:6443/readyz 2>/dev/null);
+        case "$code" in
+          200|401|403) echo OK ;;
+          *) echo FAIL ;;
+        esac'
+      scan_interval: 60
+      command_timeout: 10
