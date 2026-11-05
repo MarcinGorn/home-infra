@@ -136,3 +136,19 @@
         message: "Home Assistant utracił dane z Glances przez ponad 3 minuty."
         data:
           tag: geronimo-glances
+
+- id: geronimo_glances_recovered
+  alias: "Geronimo - Glances recovered"
+  mode: single
+  triggers:
+    - trigger: template
+      value_template: >
+        {{ is_number(states('sensor.localhost_cpu_usage')) }}
+      for: "00:01:00"
+  actions:
+    - action: notify.mobile_app_miquel_iphone
+      data:
+        title: "Geronimo - monitoring restored"
+        message: "Glances ponownie odpowiada. Monitoring serwera działa."
+        data:
+          tag: geronimo-glances
