@@ -1,7 +1,11 @@
 [Unit]
-Description=Geronimo external heartbeat
+Description=Send Geronimo heartbeat every 5 minutes
 
-[Service]
-Type=oneshot
-EnvironmentFile=/etc/geronimo-heartbeat.env
-ExecStart=/usr/bin/curl --fail --silent --show-error --max-time 10 --retry 2 --retry-delay 3 ${HEALTHCHECK_URL}
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=5min
+AccuracySec=30s
+Unit=geronimo-heartbeat.service
+
+[Install]
+WantedBy=timers.target

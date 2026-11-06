@@ -11,6 +11,12 @@ automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
 
+logger:
+  default: warning
+  logs:
+    custom_components.aarlo: debug
+    pyaarlo: debug
+
 lovelace:
   mode: storage
   dashboards:
@@ -45,3 +51,5 @@ command_line:
         esac'
       scan_interval: 60
       command_timeout: 10
+
+  
