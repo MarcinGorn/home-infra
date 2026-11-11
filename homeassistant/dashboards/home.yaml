@@ -7,51 +7,85 @@ views:
     type: sections
     max_columns: 3
     sections:
-    - type: grid
-      cards:
-        - type: heading
-          heading: Mój dom
-          heading_style: title
-          icon: mdi:home
+      - type: grid
+        cards:
+          - type: heading
+            heading: Pogoda
+            icon: mdi:weather-partly-cloudy
 
-        - type: tile
-          entity: binary_sensor.rax40_gateway_wan_status
-          name: Internet
-          icon: mdi:wan
+          - type: weather-forecast
+            entity: weather.forecast_home
+            show_current: true
+            show_forecast: true
+            forecast_type: daily
+            grid_options:
+              columns: 12
 
-        - type: tile
-          entity: switch.adguard_home_protection
-          name: AdGuard
-          icon: mdi:shield-check
+      - type: grid
+        cards:
+          - type: heading
+            heading: Monitoring
+            icon: mdi:cctv
 
-    - type: grid
-      cards:
-        - type: heading
-          heading: Pralnia
-          icon: mdi:washing-machine
+          - type: picture-entity
+            entity: camera.aarlo_wejscie
+            name: Wejście
+            camera_view: auto
+            show_state: false
+            grid_options:
+              columns: 6
+            tap_action:
+              action: navigate
+              navigation_path: /home-control/security
 
-        - type: tile
-          entity: sensor.laundry_room_washer_machine_state
-          name: Pralka
+          - type: picture-entity
+            entity: camera.aarlo_tyl_domu
+            name: Tył domu
+            camera_view: auto
+            show_state: false
+            grid_options:
+              columns: 6
+            tap_action:
+              action: navigate
+              navigation_path: /home-control/security
 
-        - type: tile
-          entity: sensor.laundry_room_dryer_machine_state
-          name: Suszarka
+      - type: grid
+        cards:
+          - type: heading
+            heading: Stan domu
+            icon: mdi:home-heart
 
-    - type: grid
-      cards:
-        - type: heading
-          heading: Geronimo
-          icon: mdi:server
+          - type: tile
+            entity: binary_sensor.rax40_gateway_wan_status
+            name: Internet
 
-        - type: tile
-          entity: sensor.localhost_cpu_usage
-          name: CPU
+          - type: tile
+            entity: switch.adguard_home_protection
+            name: AdGuard
 
-        - type: tile
-          entity: sensor.localhost_memory_usage
-          name: RAM
+          - type: heading
+            heading: Pralnia
+            icon: mdi:washing-machine
 
+          - type: tile
+            entity: sensor.laundry_room_washer_machine_state
+            name: Pralka
+
+          - type: tile
+            entity: sensor.laundry_room_dryer_machine_state
+            name: Suszarka
+
+          - type: heading
+            heading: Geronimo
+            icon: mdi:server
+
+          - type: tile
+            entity: sensor.localhost_cpu_usage
+            name: CPU
+
+          - type: tile
+            entity: sensor.localhost_memory_usage
+            name: RAM
 
   - title: Security
     path: security
