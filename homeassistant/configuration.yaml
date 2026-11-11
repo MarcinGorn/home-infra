@@ -14,8 +14,10 @@ scene: !include scenes.yaml
 logger:
   default: warning
   logs:
-    custom_components.aarlo: debug
-    pyaarlo: debug
+    custom_components.aarlo: warning
+    pyaarlo: warning
+    homeassistant.components.stream: warning
+    homeassistant.components.ffmpeg: warning
 
 lovelace:
   mode: storage
@@ -26,6 +28,12 @@ lovelace:
       icon: mdi:server
       show_in_sidebar: true
       filename: dashboards/geronimo.yaml
+   home-control:
+      mode: yaml
+      title: Dom
+      icon: mdi:home
+      show_in_sidebar: true
+      filename: dashboards/home.yaml
 
 command_line:
   - sensor:
@@ -51,5 +59,3 @@ command_line:
         esac'
       scan_interval: 60
       command_timeout: 10
-
-  

@@ -1,0 +1,15 @@
+title: Dom
+
+views:
+  - title: Dom
+    path: home
+    icon: mdi:home
+    type: sections
+    max_columns: 3
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Mój dom
+            heading_style: title
+            icon: mdi:home
