@@ -52,6 +52,7 @@ views:
           entity: sensor.localhost_memory_usage
           name: RAM
 
+
   - title: Security
     path: security
     icon: mdi:cctv
@@ -59,6 +60,7 @@ views:
     max_columns: 2
     sections:
       - type: grid
+        column_span: 1
         cards:
           - type: heading
             heading: Wejście
@@ -66,19 +68,29 @@ views:
 
           - type: picture-entity
             entity: camera.aarlo_wejscie
-            name: Kamera — wejście
+            name: Wejście
             camera_view: live
+            show_name: false
             show_state: false
+            grid_options:
+              columns: 12
+            tap_action:
+              action: more-info
 
           - type: tile
             entity: binary_sensor.aarlo_motion_wejscie
-            name: Wykrywanie ruchu
+            name: Ruch
+            grid_options:
+              columns: 6
 
           - type: tile
             entity: sensor.aarlo_battery_level_wejscie
             name: Bateria
+            grid_options:
+              columns: 6
 
       - type: grid
+        column_span: 1
         cards:
           - type: heading
             heading: Tył domu
@@ -86,17 +98,27 @@ views:
 
           - type: picture-entity
             entity: camera.aarlo_tyl_domu
-            name: Kamera — tył domu
+            name: Tył domu
             camera_view: live
+            show_name: false
             show_state: false
+            grid_options:
+              columns: 12
+            tap_action:
+              action: more-info
 
           - type: tile
             entity: binary_sensor.aarlo_motion_tyl_domu
-            name: Wykrywanie ruchu
+            name: Ruch
+            grid_options:
+              columns: 6
 
           - type: tile
             entity: sensor.aarlo_battery_level_tyl_domu
             name: Bateria
+            grid_options:
+              columns: 6
+
 
   - title: Laundry
     path: laundry
