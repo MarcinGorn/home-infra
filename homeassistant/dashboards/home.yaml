@@ -1,15 +1,243 @@
 title: Dom
 
 views:
-  - title: Dom
+  - title: Home
     path: home
     icon: mdi:home
+    type: sections
+    max_columns: 3
+    sections:
+    - type: grid
+      cards:
+        - type: heading
+          heading: Mój dom
+          heading_style: title
+          icon: mdi:home
+
+        - type: tile
+          entity: binary_sensor.rax40_gateway_wan_status
+          name: Internet
+          icon: mdi:wan
+
+        - type: tile
+          entity: switch.adguard_home_protection
+          name: AdGuard
+          icon: mdi:shield-check
+
+    - type: grid
+      cards:
+        - type: heading
+          heading: Pralnia
+          icon: mdi:washing-machine
+
+        - type: tile
+          entity: sensor.laundry_room_washer_machine_state
+          name: Pralka
+
+        - type: tile
+          entity: sensor.laundry_room_dryer_machine_state
+          name: Suszarka
+
+    - type: grid
+      cards:
+        - type: heading
+          heading: Geronimo
+          icon: mdi:server
+
+        - type: tile
+          entity: sensor.localhost_cpu_usage
+          name: CPU
+
+        - type: tile
+          entity: sensor.localhost_memory_usage
+          name: RAM
+
+  - title: Security
+    path: security
+    icon: mdi:cctv
+    type: sections
+    max_columns: 2
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Wejście
+            icon: mdi:doorbell-video
+
+          - type: picture-entity
+            entity: camera.aarlo_wejscie
+            name: Kamera — wejście
+            camera_view: live
+            show_state: false
+
+          - type: tile
+            entity: binary_sensor.aarlo_motion_wejscie
+            name: Wykrywanie ruchu
+
+          - type: tile
+            entity: sensor.aarlo_battery_level_wejscie
+            name: Bateria
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Tył domu
+            icon: mdi:cctv
+
+          - type: picture-entity
+            entity: camera.aarlo_tyl_domu
+            name: Kamera — tył domu
+            camera_view: live
+            show_state: false
+
+          - type: tile
+            entity: binary_sensor.aarlo_motion_tyl_domu
+            name: Wykrywanie ruchu
+
+          - type: tile
+            entity: sensor.aarlo_battery_level_tyl_domu
+            name: Bateria
+
+  - title: Laundry
+    path: laundry
+    icon: mdi:washing-machine
+    type: sections
+    max_columns: 2
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Pralka
+            icon: mdi:washing-machine
+
+          - type: tile
+            entity: sensor.laundry_room_washer_machine_state
+            name: Status pralki
+
+          - type: tile
+            entity: sensor.laundry_room_washer_completion_time
+            name: Zakończenie programu
+
+          - type: tile
+            entity: sensor.laundry_room_washer_power
+            name: Pobór mocy
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Suszarka
+            icon: mdi:tumble-dryer
+
+          - type: tile
+            entity: sensor.laundry_room_dryer_machine_state
+            name: Status suszarki
+
+          - type: tile
+            entity: sensor.laundry_room_dryer_completion_time
+            name: Zakończenie programu
+
+          - type: tile
+            entity: sensor.laundry_room_dryer_power
+            name: Pobór mocy
+
+  - title: Media
+    path: media
+    icon: mdi:television
+    type: sections
+    max_columns: 2
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Telewizory
+            icon: mdi:television
+
+          - type: tile
+            entity: media_player.telewizor_w_salonie
+            name: Salon
+
+          - type: tile
+            entity: media_player.telewizor_w_pokoju_rodzinnym
+            name: Pokój rodzinny
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Xbox
+            icon: mdi:microsoft-xbox
+
+          - type: tile
+            entity: binary_sensor.living_room_xbox
+            name: Xbox — dostępność
+
+          - type: tile
+            entity: sensor.living_room_xbox_status
+            name: Status
+
+          - type: tile
+            entity: sensor.living_room_xbox_now_playing
+            name: Aktualna gra
+
+  - title: Infrastructure
+    path: infrastructure
+    icon: mdi:server
     type: sections
     max_columns: 3
     sections:
       - type: grid
         cards:
           - type: heading
-            heading: Mój dom
-            heading_style: title
-            icon: mdi:home
+            heading: Geronimo
+            icon: mdi:server
+
+          - type: tile
+            entity: sensor.localhost_cpu_usage
+            name: CPU
+
+          - type: tile
+            entity: sensor.localhost_memory_usage
+            name: RAM
+
+          - type: tile
+            entity: sensor.localhost_host_disk_usage
+            name: Dysk systemowy
+
+          - type: tile
+            entity: sensor.localhost_host_var_disk_usage
+            name: Dysk /var
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: AdGuard Home
+            icon: mdi:shield-check
+
+          - type: tile
+            entity: switch.adguard_home_protection
+            name: Ochrona DNS
+
+          - type: tile
+            entity: sensor.adguard_home_dns_queries
+            name: Zapytania DNS
+
+          - type: tile
+            entity: sensor.adguard_home_dns_queries_blocked_ratio
+            name: Zablokowane zapytania
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Sieć
+            icon: mdi:router-wireless
+
+          - type: tile
+            entity: binary_sensor.rax40_gateway_wan_status
+            name: Internet WAN
+
+          - type: tile
+            entity: sensor.rax40_gateway_download_speed
+            name: Download
+
+          - type: tile
+            entity: sensor.rax40_gateway_upload_speed
+            name: Upload
